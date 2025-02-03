@@ -1,0 +1,41 @@
+# Add `~/bin` to the `$PATH`
+export PATH="$HOME/bin:$PATH";
+
+# Make neovim default editor
+export EDITOR=nvim
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob;
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend;
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+### ZSH HOME
+export ZSH=$HOME/.config/zsh
+
+### ---- history config -------------------------------------
+export HISTFILE=$ZSH/.zsh_history
+
+# How many commands zsh will load to memory.
+export HISTSIZE=10000
+
+# How many commands history will save on file.
+export SAVEHIST=10000
+
+# History won't save duplicates.
+setopt HIST_IGNORE_ALL_DUPS
+
+# History won't show duplicates on search.
+setopt HIST_FIND_NO_DUPS
+
+fpath=($ZSH/completions $fpath)
+fpath+=($ZSH/pure)
+source $ZSH/.aliases
+source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
