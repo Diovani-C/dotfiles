@@ -12,3 +12,6 @@ vim.opt.listchars = {
   conceal = "┊",
   nbsp = "␣",
 }
+
+-- Disable anoing message
+vim.g.lazyvim_check_order = false
